@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ReactModal from "react-modal";
+import "./react-modal.css"
 
 const AddTaskAction = ({ addTask, ...props }) => {
 
@@ -26,8 +27,6 @@ const AddTaskAction = ({ addTask, ...props }) => {
         },
     };
 
-
-
     return (
         <div className="AddTaskAction">
             <button onClick={openModal} {...props}>
@@ -36,7 +35,9 @@ const AddTaskAction = ({ addTask, ...props }) => {
             <ReactModal style={customStyles} isOpen={showModal}>
                 <div>
                 <h2>Добавление</h2>
-                
+
+                    <hr/>
+                    
                     <div>
                         <h3>Имя</h3>
                         <div>
@@ -45,7 +46,7 @@ const AddTaskAction = ({ addTask, ...props }) => {
 
                         <h3>Дата</h3>
                         <div>
-                            <input onChange={e => task.date =new Date(e.target.value)} type="date"   className="border border-1 m-1"></input>
+                            <input onChange={e => task.date =e.target.value} type="date"   className="border border-1 m-1"></input>
                         </div>
 
                         <h3>Число</h3>

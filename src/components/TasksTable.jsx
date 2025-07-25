@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from "react";
 import TasksTableRow from "./TasksTableRow.jsx";
 
 const TasksTable = ({tasks, deleteTask, updateTask}) => {
-
-    console.log("Table");
 
     return (
 
@@ -20,7 +17,7 @@ const TasksTable = ({tasks, deleteTask, updateTask}) => {
                 </thead>
                 <tbody>
                     {
-                        tasks.map((task, i) => <TasksTableRow task={task} index={i} deleteTask={deleteTask} updateTask={updateTask} key={task.id} />)
+                        tasks.map((task, i) => <TasksTableRow task={task} index={i} deleteTask={deleteTask} updateTask={updateTask} />)
                     }
                 </tbody>
             </table>
