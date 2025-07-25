@@ -41,12 +41,9 @@ const TablePage = () => {
 
         let tasksInfo = tasksSession
         tasksInfo.push(task)
-        console.log(tasksInfo)
         sessionStorage.setItem("tasksSession", JSON.stringify(tasksInfo))
 
-        let info = JSON.parse(sessionStorage.getItem("tasksSession"));
-
-        
+        let info = JSON.parse(sessionStorage.getItem("tasksSession")); 
 
         setTasks(info.map((task, index)=> 
         {
@@ -58,7 +55,7 @@ const TablePage = () => {
     const deleteTask = (index) => {
 
         let tasksInfo = tasksSession;
-        tasksInfo.splice(index,1)
+        tasksInfo.splice(index-1,1)
         sessionStorage.setItem("tasksSession", JSON.stringify(tasksInfo))
         setTasksSession(JSON.parse(sessionStorage.getItem("tasksSession")))
 
@@ -66,21 +63,28 @@ const TablePage = () => {
 
     const updateTask = (update, index) => {
 
-        console.log(update);
-
         if(!update.name || !update.date || !update.someNumber)
         {
             return false
         }
 
         let tasksInfo = tasksSession;
-        tasksInfo[index].name=update.name
-        tasksInfo[index].date=update.date       
-        tasksInfo[index].someNumber=update.someNumber
+        tasksInfo[index-1].name=update.name
+        tasksInfo[index-1].date=update.date       
+        tasksInfo[index-1].someNumber=update.someNumber
         sessionStorage.setItem("tasksSession", JSON.stringify(tasksInfo))
         setTasksSession(JSON.parse(sessionStorage.getItem("tasksSession")))
 
         return true
+    }
+
+    const passFilter = (task) =>
+        (!filter.name || (task.name.includes(filter.name))) &&
+        (!filter.date || (task.date == filter.date)) &&
+        (!filter.someNumber || (task.someNumber == filter.someNumber))
+
+    const inputStyle = {
+        marginLeft: '8%'
     }
 
     return (
@@ -88,8 +92,12 @@ const TablePage = () => {
             <div className="container">
                 <div className="d-flex">
                     <AddTaskAction  addTask={addTask}/>
+                     <div style={inputStyle}> <input onChange={e => {setFilter({...filter, name: e.target.value}); console.log(filter)}}  placeholder="Поиск по имени" className="border border-1 m-1"/></div>
+                     <div  style={inputStyle}>Поиск по дате <input  onChange={e => setFilter({...filter, date: e.target.value})} type="date" className="border border-1 m-1"/></div>
+                     <div style={inputStyle}> <input onChange={e => setFilter({...filter, someNumber: e.target.value})}placeholder="Поиск по числу" type="number" className="border border-1 m-1"/></div>
                 </div>
-                <TasksTable tasks={tasks} deleteTask={deleteTask} updateTask={updateTask}/>
+                <TasksTable tasks={tasks.filter((task) =>  passFilter(task))} deleteTask={deleteTask} updateTask={updateTask} filter={filter}/>
+                
             </div>
         </div>
     );

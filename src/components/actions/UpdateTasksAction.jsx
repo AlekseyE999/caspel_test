@@ -30,8 +30,6 @@ const UpdateTasksAction = ({updateTask, index, task, ...props}) => {
         },
     };
 
-    console.log(update);
-
     return (
         <div className="AddTaskAction">
             <button  width="20%" height="20%" onClick={openModal}{...props}>
@@ -43,7 +41,7 @@ const UpdateTasksAction = ({updateTask, index, task, ...props}) => {
                     <div>
 
                         <hr/>
-                        
+
                         <h3>Имя</h3>
                         <div>
                             <input value={update.name ?? ""} onChange={e => e.target.value ? setUpdate({...update, name: String(e.target.value)}) :

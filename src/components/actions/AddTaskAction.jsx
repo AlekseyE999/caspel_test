@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ReactModal from "react-modal";
-import "./react-modal.css"
+import "../../css/react-modal.css"
 
 const AddTaskAction = ({ addTask, ...props }) => {
 

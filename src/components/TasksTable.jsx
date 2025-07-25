@@ -1,6 +1,6 @@
 import TasksTableRow from "./TasksTableRow.jsx";
 
-const TasksTable = ({tasks, deleteTask, updateTask}) => {
+const TasksTable = ({tasks, deleteTask, updateTask}) => {  
 
     return (
 
@@ -17,7 +17,7 @@ const TasksTable = ({tasks, deleteTask, updateTask}) => {
                 </thead>
                 <tbody>
                     {
-                        tasks.map((task, i) => <TasksTableRow task={task} index={i} deleteTask={deleteTask} updateTask={updateTask} />)
+                        tasks.map((task, i) => <TasksTableRow task={task} index={i} deleteTask={deleteTask} updateTask={updateTask}  key={task.id}/>)
                     }
                 </tbody>
             </table>
